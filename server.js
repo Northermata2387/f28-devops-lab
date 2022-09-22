@@ -39,7 +39,7 @@ app.post('/api/students', (req, res) => {
 
    try {
 
-       if (name > max_chars) {
+       if (name.length > max_chars) {
            rollbar.log('name is to long')
            res.status(400).send('name is to long')
        }  else if (name === ''){
