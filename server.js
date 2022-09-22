@@ -6,16 +6,16 @@ const cors = require('cors')
 app.use(express.json())
 app.use(cors())
 
-// // include and initialize the rollbar library with your access token
-// var Rollbar = require('rollbar')
-// var rollbar = new Rollbar({
-//   accessToken: 'a5cfbfc7041f4392a5ebf6982e2081d7',
-//   captureUncaught: true,
-//   captureUnhandledRejections: true,
-// })
+// include and initialize the rollbar library with your access token
+var Rollbar = require('rollbar')
+var rollbar = new Rollbar({
+  accessToken: 'b383d742caa44456ac43b83f1b8cb0b3',
+  captureUncaught: true,
+  captureUnhandledRejections: true,
+})
 
-// // record a generic message and send it to Rollbar
-// rollbar.log('Hello world!')
+// record a generic message and send it to Rollbar
+rollbar.log('Hello world!')
 
 const students = ['Hairy Crab', 'Sweet Ya Bao', 'Yunnan Black', 'Honey Orchid', 'Tie Guan Yin', 'Jin Jun Mei']
 
