@@ -43,10 +43,10 @@ app.post('/api/students', (req, res) => {
            rollbar.log('Tea name was added')
            res.status(200).send(students)
        }  else if (name === ''){
-           rollbar.log('No tea name was typed')
+           rollbar.critical('No tea name was typed')
            res.status(400).send('You must enter a name.')
        }  else {
-           rollbar.log('Tea name is already on the list')
+           rollbar.warning('Tea name is already on the list')
            res.status(400).send('That tea already exists.')
        }
    } catch (err) {
