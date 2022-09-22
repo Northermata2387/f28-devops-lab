@@ -43,13 +43,10 @@ app.post('/api/students', (req, res) => {
            rollbar.log('Tea name was added')
            res.status(200).send(students)
        }  else if (name === ''){
-           Rollbar.critical('No tea name was typed')
+           rollbar.log('No tea name was typed')
            res.status(400).send('You must enter a name.')
-    //    }  else if (name > max_chars){
-    //        rollbar.critical('tea name is more than 24 characters')
-    //        res.status(400).send('Name is too long.')
        }  else {
-           Rollbar.warning('Tea name is already on the list')
+           rollbar.log('Tea name is already on the list')
            res.status(400).send('That tea already exists.')
        }
    } catch (err) {
