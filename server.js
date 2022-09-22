@@ -31,6 +31,7 @@ app.get('/api/students', (req, res) => {
 //allows to post student details or cretae a student name
 app.post('/api/students', (req, res) => {
    let {name} = req.body
+   let max_chars = 24;
 
    const index = students.findIndex(student => {
        return student === name
@@ -44,11 +45,11 @@ app.post('/api/students', (req, res) => {
        }  else if (name === ''){
            rollbar.error('No tea name was typed')
            res.status(400).send('You must enter a name.')
-       }  else if (name <= 24){
-          rollbar.critical('tea name is more than 24 characters')
-          res.status(400).send('Name is too long.')
+       }  else if (name > max_chars){
+           rollbar.critical('tea name is more than 24 characters')
+           res.status(400).send('Name is too long.')
        }  else {
-            rollbar.error('Tea name is already on the list')
+           rollbar.error('Tea name is already on the list')
            res.status(400).send('That tea already exists.')
        }
    } catch (err) {
