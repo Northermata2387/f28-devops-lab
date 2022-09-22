@@ -38,16 +38,20 @@ app.post('/api/students', (req, res) => {
    })
 
    try {
-       if (index === -1 && name !== '') {
-           students.push(name)
-           rollbar.log('Tea name was added')
-           res.status(200).send(students)
+
+       if (name > max_chars) {
+           rollbar.log('name is to long')
+           res.status(400).send('name is to long')
        }  else if (name === ''){
            rollbar.critical('No tea name was typed')
            res.status(400).send('You must enter a name.')
+       }  else if (index === -1 && name !== ''){
+           students.push(name)
+           rollbar.log('Tea name was added')
+           res.status(200).send(students)
        }  else {
            rollbar.warning('Tea name is already on the list')
-           res.status(400).send('That tea already exists.')
+           res.status(400).send('Tea name is on the list.')
        }
    } catch (err) {
        console.log(err)
@@ -65,6 +69,8 @@ app.delete('/api/students/:index', (req, res) => {
 
 //not sure what port heroku will use or || well suggest the port if necessary
 const port = process.env.PORT || 5050
+
+app.use(rollbar.errorHandler())
 
 app.listen(port, () => console.log(`Server listening on ${port}`))
 
