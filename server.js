@@ -63,7 +63,7 @@ app.delete('/api/students/:index', (req, res) => {
     const targetIndex = +req.params.index
     
     students.splice(targetIndex, 1)
-    rollbar.info('Tea name removed')
+    rollbar.critical('Based on string')
     rollbar.critical('testing critical link')
     res.status(200).send(students)
 })
