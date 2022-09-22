@@ -47,7 +47,7 @@ app.post('/api/students', (req, res) => {
            res.status(400).send('You must enter a name.')
        }  else if (index === -1 && name !== ''){
            students.push(name)
-           rollbar.log('Tea name was added')
+           rollbar.info('Tea name added')
            res.status(200).send(students)
        }  else {
            rollbar.warning('Tea name is on the list of names')
