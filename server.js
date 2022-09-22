@@ -38,7 +38,7 @@ app.post('/api/students', (req, res) => {
    })
 
    try {
-       if (index === -1 && name !== '') {
+       if (index === -1 && name !== '' && name < max_chars) {
            students.push(name)
            rollbar.log('Tea name was added')
            res.status(200).send(students)
