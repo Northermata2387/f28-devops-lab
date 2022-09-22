@@ -40,17 +40,17 @@ app.post('/api/students', (req, res) => {
    try {
 
        if (name.length > max_chars) {
-           rollbar.critical('name is to long')
+           rollbar.critical('name is too long')
            res.status(400).send('name is to long')
        }  else if (name === ''){
-           rollbar.critical('No tea name was typed')
+           rollbar.warning('No tea name was entered')
            res.status(400).send('You must enter a name.')
        }  else if (index === -1 && name !== ''){
            students.push(name)
            rollbar.log('Tea name was added')
            res.status(200).send(students)
        }  else {
-           rollbar.warning('Tea name is already on the list')
+           rollbar.warning('Tea name is on the list of names')
            res.status(400).send('Tea name is on the list.')
        }
    } catch (err) {
@@ -63,8 +63,7 @@ app.delete('/api/students/:index', (req, res) => {
     const targetIndex = +req.params.index
     
     students.splice(targetIndex, 1)
-    rollbar.critical('Based on string')
-    rollbar.critical('testing critical link')
+    rollbar.info('name removed from list')
     res.status(200).send(students)
 })
 
